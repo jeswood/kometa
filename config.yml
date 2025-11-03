@@ -1,0 +1,173 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kometa-team/kometa/nightly/json-schema/config-schema.json
+## Do not remove the above line
+## This file is a template remove the .template to use the file
+
+## Plex and TMDb are the two connections which are required for the script to run
+
+plex:
+  url: http://192.168.1.111:32400/
+  token: edY7UZ3LtaFEeqa6qNJ_
+  timeout: 60
+  db_cache: 40
+  clean_bundles: false
+  empty_trash: false
+  optimize: false
+  verify_ssl: true
+tmdb:
+  apikey: 8bb444ac7d419d0698bce745c4dd269f
+  language: en
+  cache_expiration: 60
+  region:
+
+libraries:
+  Movies: ### REAL MOVIES LIBRARY HERE ###
+    collection_files:
+    - file: config/collections/mylists.yml         ## COLLECTION FILES ##
+    - file: config/collections/letterboxd_collections.yml
+    - file: config/collections/people_collections.yml
+    - file: config/collections/language_collections.yml
+    - file: config/collections/companies_collections.yml
+    - file: config/collections/genre_collections.yml
+    - default: franchise                ###          FRANCHISE COLLECTIONS              ###
+      template_variables:
+        minimum_items: 3
+        collection_section: 181
+        sync_mode: sync
+        show_missing: false
+        collection_mode: hide
+    - default: universe                ###          UNIVERSE COLLECTIONS              ###
+      template_variables:
+        minimum_items: 3
+        collection_section: 180
+        show_missing: false
+    - default: director                ###          DIRECTOR COLLECTIONS              ###
+      template_variables:
+        minimum_items: 5
+        collection_order: random
+        exclude:
+        - Ethan Coen
+        - Joel Coen
+        show_missing: false
+    - default: imdb                ###          CHARTS COLLECTIONS              ###
+      template_variables:
+        collection_order: random
+        show_latest: false
+        sync_mode: sync
+    - default: letterboxd
+      template_variables:
+        collection_order: random
+        cache_builders: 7
+        cache_builders_1001_movies: 30
+        cache_builders_edgarwright: 30
+        sync_mode: sync
+    - default: oscars
+      template_variables:
+        collection_order: random
+        use_year_collections: false
+        cache_builders: 30
+    - default: cannes
+      template_variables:
+        collection_order: random
+        use_year_collections: false
+        cache_builders: 30
+    - default: genre                ###          GENRE COLLECTIONS              ###
+      template_variables:
+        exclude:
+        - Film-Noir
+        - Anime
+        - Fun
+        - Standup
+        - Reality
+        - TV Movie
+        - Food
+        - Holidays
+        - Music
+        - Musical
+        - Indie
+        - Children
+        append_addons:
+          Thriller:
+          - Suspense
+        minimum_items: 15
+        sort_by: random
+        sync_mode: sync
+    - default: seasonal               ###          SEASONAL COLLECTIONS              ###
+      template_variables:
+        collection_order: random
+        exclude:
+        - labor
+        - veteran
+        - women
+        - memorial
+        sync_mode: sync
+    - default: based               ###          BASED ON... COLLECTIONS              ###
+      template_variables:
+        sort_by: random
+        sync_mode: sync
+        cache_builders: 15
+    overlay_files:                      ###          OVERLAYS         ###
+    - file: config/overlays/audience_rating.yml
+settings:                      ###          SETTINGS         ###
+  run_order:
+  - operations
+  - metadata
+  - collections
+  - overlays
+  cache: true
+  cache_expiration: 60
+  asset_directory: config/assets
+  asset_folders: true
+  asset_depth: 2
+  create_asset_folders: true
+  prioritize_assets: false
+  dimensional_asset_rename: false
+  download_url_assets: true
+  show_missing_season_assets: false
+  show_missing_episode_assets: false
+  show_asset_not_needed: false
+  sync_mode: append
+  minimum_items: 3
+  default_collection_order: release
+  delete_below_minimum: true
+  delete_not_scheduled: false
+  run_again_delay: 2
+  missing_only_released: true
+  only_filter_missing: false
+  show_unmanaged: true
+  show_unconfigured: true
+  show_filtered: false
+  show_unfiltered: false
+  show_options: true
+  show_missing: true
+  show_missing_assets: false
+  save_report: true
+  tvdb_language: eng
+  ignore_ids:
+  ignore_imdb_ids:
+  item_refresh_delay: 0
+  playlist_sync_to_users:
+  playlist_exclude_users:
+  playlist_report: false
+  verify_ssl: true
+  custom_repo:
+  overlay_artwork_filetype: webp_lossy
+  overlay_artwork_quality: 90
+tautulli:                          # Can be individually specified per library as well
+  url:
+  apikey:
+  cache_expiration: 60
+mdblist:
+  apikey: 4kjs1ifp7326ftpjy7cbpy6ir     # Enter MDBList API Key (Optional)
+  cache_expiration: 60
+trakt:
+  client_id: 56c50c28bc04e7cf62f1a137d5a20dd8640406d5df8315e425e50958d77ed560
+  client_secret: d61cb163fc05a5971b538555333636efbc596a4c068e7c3b26d1d6a29320f5d7
+  authorization:
+    access_token: 59a2e69145c1e74147cd62d4abeb96235b65fce981b3585ae157f19808658fe5
+    token_type: Bearer
+    expires_in: 604800
+    refresh_token: 83e75ba57967628ee3dbd439bcc423c9c82fdfc1483fbba42dd58ace209f8078
+    scope: public
+    created_at: 1761751462
+  pin:
+  force_refresh:
